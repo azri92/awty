@@ -3,6 +3,7 @@ package edu.washington.aazri3.awty;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,13 +13,14 @@ import android.widget.Toast;
 
 public class AnnoyanceReceiver extends BroadcastReceiver {
 
-    // display a toast for now
     @Override
     public void onReceive(Context context, Intent intent) {
-//        Log.d("AnnoyanceReceiver", "Received intent: " + intent.toString());
-
         String msg = intent.getStringExtra("msg");
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        String phone = intent.getStringExtra("phone");
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(phone, null, msg, null, null);
+
+        Log.d("AnnoyanceReceiver", "sms sent to " + phone);
     }
 
 }

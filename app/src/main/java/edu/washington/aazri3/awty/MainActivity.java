@@ -54,12 +54,13 @@ public class MainActivity extends ActionBarActivity {
                         // start service
                         int interval = Integer.parseInt(intervalString);
 
-                        String formattedPhone = "(" + phone.substring(0,3) + ") " +
-                                phone.substring(3,6) + "-" + phone.substring(6);
+//                        String formattedPhone = "(" + phone.substring(0,3) + ") " + phone.substring(3,6) + "-" + phone.substring(6);
 
                         Intent intent = new Intent(MainActivity.this, AnnoyanceReceiver.class);
                         intent.setAction("edu.washington.aazri3.awty.annoy");
-                        intent.putExtra("msg", formattedPhone + ": " + msg);
+//                        intent.putExtra("msg", formattedPhone + ": " + msg);
+                        intent.putExtra("msg", msg);
+                        intent.putExtra("phone", phone);
 
                         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
                                 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -85,7 +86,7 @@ public class MainActivity extends ActionBarActivity {
 
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 //        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + intervalInMillis, intervalInMillis, pendingIntent);
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 3000, 3000, pendingIntent); // for testing
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, 10000, pendingIntent); // for testing
     }
 
     private void stopAnnoying(PendingIntent pendingIntent) {
