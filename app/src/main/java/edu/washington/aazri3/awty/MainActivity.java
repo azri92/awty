@@ -34,6 +34,7 @@ public class MainActivity extends ActionBarActivity {
         btnAction = (Button) findViewById(R.id.btnAction);
 
         Intent intent = new Intent(MainActivity.this, AnnoyanceReceiver.class);
+        intent.setAction("edu.washington.aazri3.awty.annoy");
         isAnnoying = (PendingIntent.getBroadcast(getApplicationContext(), 0, intent,
                 PendingIntent.FLAG_NO_CREATE) != null);
         if (isAnnoying)
@@ -57,6 +58,7 @@ public class MainActivity extends ActionBarActivity {
                                 phone.substring(3,6) + "-" + phone.substring(6);
 
                         Intent intent = new Intent(MainActivity.this, AnnoyanceReceiver.class);
+                        intent.setAction("edu.washington.aazri3.awty.annoy");
                         intent.putExtra("msg", formattedPhone + ": " + msg);
 
                         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
@@ -68,6 +70,7 @@ public class MainActivity extends ActionBarActivity {
                 } else {
                     // stop service
                     Intent intent = new Intent(MainActivity.this, AnnoyanceReceiver.class);
+                    intent.setAction("edu.washington.aazri3.awty.annoy");
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
                             0, intent, PendingIntent.FLAG_NO_CREATE);
                     stopAnnoying(pendingIntent);
@@ -81,8 +84,8 @@ public class MainActivity extends ActionBarActivity {
         int intervalInMillis = interval * 1000 * 60;
 
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + intervalInMillis, intervalInMillis, pendingIntent);
-//        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 3000, 3000, pendingIntent); // for testing
+//        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + intervalInMillis, intervalInMillis, pendingIntent);
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 3000, 3000, pendingIntent); // for testing
     }
 
     private void stopAnnoying(PendingIntent pendingIntent) {
@@ -97,25 +100,25 @@ public class MainActivity extends ActionBarActivity {
         Toast.makeText(getApplicationContext(), update, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }
