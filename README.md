@@ -13,3 +13,7 @@ In this part, we will just pop Toast asking the question; in a future part, we w
 * As a user, when I am using the application's UI, when "Start" is pressed, the Button's text should switch to "Stop", and pushing "Stop" should cause the service to stop sending messages.
 * As a user, when I "Start" the service, it should begin to "send messages" every N minutes, as given by the user in the EditText UI. For now, these should be Toast messages using the format: "(425) 555-1212: Are we there yet?".
 * As a user, when I switch away from this application to another one, the messages should continue to send every N minutes, and should continue to send until I navigate back to this application and push "Stop".
+
+# Part 2
+
+As a user, when I "Start" the service, it should begin to "send messages" every N minutes, as given by the user in the EditText UI. These should be sent as SMS messages.
